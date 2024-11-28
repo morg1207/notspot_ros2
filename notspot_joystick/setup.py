@@ -20,7 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "ramped_joystick = notspot_joystick.ramped_joystick:main"
+            "ramped_joystick = notspot_joystick.ramped_joystick:main",
+            "keyboard_sim_joy = notspot_joystick.keyboard_sim_joy:main",
         ],
     },
 )
