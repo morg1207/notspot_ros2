@@ -89,7 +89,7 @@ class SimulatedJoystick(Node):
         # Create and publish Joy message
         joy_msg = Joy()
         joy_msg.header.stamp = self.get_clock().now().to_msg()
-        joy_msg.axes = [float(value) / 63 for value in self.axes]  # Normalize axes to [-1, 1]
+        joy_msg.axes = [float(value) / 126 for value in self.axes]  # Normalize axes to [-1, 1]
         joy_msg.buttons = self.buttons
         self.joy_pub.publish(joy_msg)
 
