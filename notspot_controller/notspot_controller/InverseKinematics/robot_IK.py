@@ -55,20 +55,17 @@ class InverseKinematics(object):
         """
         Compute the inverse kinematics for all the legs.
         """
-        print("3")
         positions = self.get_local_positions(leg_positions,dx,dy,dz,
                                                             roll,pitch,yaw)
         angles = []
-        print("4")
+
         for i in range(4):
             x = positions[i][0]
             y = positions[i][1]
             z = positions[i][2]
-            print("5")
             F = sqrt(x**2 + y**2 - self.l2**2)
             G = F - self.l1
             H = sqrt(G**2 + z**2)
-            print("6")
             theta1 = atan2(y,x) + atan2(F,self.l2 * (-1)**i)
             D = (H**2 - self.l3**2 - self.l4**2)/(2*self.l3*self.l4)
             theta4 = -atan2((sqrt(1-D**2)),D)
