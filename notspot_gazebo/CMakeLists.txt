@@ -15,26 +15,6 @@ set(dependencies
   gazebo_ros
 )
 
-
-
-add_library(velodyne_plugin SHARED plugins/velodyne_plugin.cpp)
-
-target_include_directories(velodyne_plugin PUBLIC include)
-ament_target_dependencies(velodyne_plugin ${dependencies})
-ament_export_libraries(velodyne_plugin)
-
-
-install(TARGETS
-  velodyne_plugin
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
-  RUNTIME DESTINATION bin
-)
-
-install(DIRECTORY include/
-        DESTINATION include)
-
-
 install(DIRECTORY
   launch
   models
