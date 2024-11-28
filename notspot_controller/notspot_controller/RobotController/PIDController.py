@@ -27,7 +27,6 @@ class PID_controller(object):
     def run(self, roll, pitch):
         # determine error
         error = self.desired_roll_pitch - np.array([roll, pitch])
-        print("u")
         # determine time step
         clock = Clock()
         t_now = clock.now()
@@ -43,7 +42,6 @@ class PID_controller(object):
 
         # Ahora calculamos el paso de tiempo en segundos
         step = sec_diff + (nanosec_diff / 1e9)
-        print(f"{step:.12f}")
         # I term update
         self.I_term = self.I_term + error * step
 

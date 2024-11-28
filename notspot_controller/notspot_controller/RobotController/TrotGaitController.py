@@ -69,7 +69,6 @@ class TrotGaitController(GaitController):
 
     def step(self, state, command):
         if self.autoRest:
-            print("k")
             if command.velocity[0] == 0 and command.velocity[1] == 0 and command.yaw_rate == 0:
                 if state.ticks % (2 * self.phase_length) == 0:
                     self.trotNeeded = False
@@ -77,29 +76,21 @@ class TrotGaitController(GaitController):
                 self.trotNeeded = True
 
         if self.trotNeeded:
-            print("l")
             contact_modes = self.contacts(state.ticks)
-            print("m")
             new_foot_locations = np.zeros((3,4))
             for leg_index in range(4):
-                print("ñ")
                 contact_mode = contact_modes[leg_index]
                 if contact_mode == 1:
                     new_location = self.stanceController.next_foot_location(leg_index, state, command)
-                    print("o")
                 else:
-                    print("p")
                     swing_proportion = float(self.subphase_ticks(state.ticks)) / float(self.swing_ticks)
 
                     new_location = self.swingController.next_foot_location(swing_proportion,leg_index,state,command)
 
                 new_foot_locations[:, leg_index] = new_location
-            print("r")
             # tilt compensation
             if self.use_imu:
-                print("t")
                 compensation = self.pid_controller.run(state.imu_roll, state.imu_pitch)
-                print("u")
                 roll_compensation = -compensation[0]
                 pitch_compensation = -compensation[1]
 
@@ -114,9 +105,7 @@ class TrotGaitController(GaitController):
 
 
     def run(self, state, command):
-        print("i")
         state.foot_locations = self.step(state, command)
-        print("j")
         state.robot_height = command.robot_height
 
         return state.foot_locations

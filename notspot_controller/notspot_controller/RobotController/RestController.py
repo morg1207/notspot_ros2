@@ -60,7 +60,5 @@ class RestController(object):
         return temp
 
     def run(self, state, command):
-        print("h")
         state.foot_locations = self.step(state, command)
-        print("i")
         return state.foot_locations

@@ -42,11 +42,9 @@ class RobotControllerNode(Node):
         """Ejecuta la lógica principal del robot."""
         try:
             # Obtener posiciones de las patas y actualizar el controlador
-            print("b")
+
             leg_positions = self.notspot_robot.run()
-            print("c")
             self.notspot_robot.change_controller()
-            print("d")
             # Obtener la posición y orientación del cuerpo del robot
             dx = self.notspot_robot.state.body_local_position[0]
             dy = self.notspot_robot.state.body_local_position[1]
@@ -54,12 +52,10 @@ class RobotControllerNode(Node):
             roll = self.notspot_robot.state.body_local_orientation[0]
             pitch = self.notspot_robot.state.body_local_orientation[1]
             yaw = self.notspot_robot.state.body_local_orientation[2]
-            print("0")
             # Calcular los ángulos de las articulaciones
             joint_angles = self.inverse_kinematics.inverse_kinematics(
                 leg_positions, dx, dy, dz, roll, pitch, yaw
             )
-            print("1")
             # Crear y publicar el mensaje de trayectoria de articulaciones
             joint_trajectory_msg = JointTrajectory()
 
@@ -69,7 +65,6 @@ class RobotControllerNode(Node):
                 "RR1_joint", "RR2_joint", "RR3_joint",
                 "RL1_joint", "RL2_joint", "RL3_joint"
             ]
-            print("a")
             point = JointTrajectoryPoint()
             point.positions = joint_angles  # Usar posiciones calculadas
 

@@ -11,7 +11,6 @@ find_package(rclcpp REQUIRED)
 
 install(DIRECTORY
   launch
-  models
   worlds
   DESTINATION share/${PROJECT_NAME}/
 )

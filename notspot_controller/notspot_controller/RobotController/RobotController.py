@@ -102,7 +102,6 @@ class Robot(object):
         self.state.imu_pitch = rpy_angles[1]
 
     def run(self):
-        print("g")
         return self.currentController.run(self.state, self.command)
 
     @property
